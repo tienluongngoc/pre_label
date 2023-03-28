@@ -5,7 +5,7 @@ import json
 from shutil import move
 import argparse
 
-class ConverAnnotation:
+class AnnotationConversion:
     def __init__(self, data_folder) -> None:
         self.data_folder = data_folder
         self.class_names = {"0": "person", "1":"car"}
@@ -120,10 +120,10 @@ if __name__ == '__main__':
     parser.add_argument('--clean', default=True, help='clean all tmp files')   
     parser = parser.parse_args() 
 
-    converter = ConverAnnotation(parser.data) 
+    conversion = AnnotationConversion(parser.data) 
     if parser.type == 0:
-        converter.yolo_to_labelme()
+        conversion.yolo_to_labelme()
     elif parser.type == 1:
-        converter.labelme_to_yolo(remove_prelabel=False)
+        conversion.labelme_to_yolo(remove_prelabel=False)
         if parser.clean:
-            converter.clean(json=True, pre_label=True) 
+            conversion.clean(json=True, pre_label=True) 
